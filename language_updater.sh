@@ -9,6 +9,9 @@ lmtoolurl=http://www.speech.cs.cmu.edu/cgi-bin/tools/lmtool/run
 
 cd $blatherdir
 
+# make sure no other dic and lm files exist (in case of stalled downloads)
+rm -rf *.dic *.lm
+
 sed -f - $sourcefile > $sentences <<EOFcommands
   /^$/d
   /^#/d

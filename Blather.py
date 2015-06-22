@@ -8,6 +8,7 @@ import signal
 import gobject
 import os.path
 import subprocess
+import pynotify
 from optparse import OptionParser
 try:
 	import yaml
@@ -148,11 +149,15 @@ class Blather:
 			else:
 				self.run_command(cmd)
 			self.log_history(text)
+			# pynotify.init("Blather")
+			# pynotify.Notification("Blather","Executing %s" %(t)).show()
 		else:
 			#run the invalid_sentence_command if there is a valid sentence command
 			if self.options['invalid_sentence_command']:
 				subprocess.call(self.options['invalid_sentence_command'], shell=True)
 			print "no matching command %s" %(t)
+			pynotify.init("Blather")
+			pynotify.Notification("Blather","No matching command %s" %(t)).show()
 		#if there is a UI and we are not continuous listen
 		if self.ui:
 			if not self.continuous_listen:
